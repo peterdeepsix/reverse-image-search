@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: aquiladb
+  namespace: "default"
+  labels:
+    app: "aquiladb"
 spec:
   selector:
     matchLabels:
@@ -17,20 +20,19 @@ spec:
     spec:
       containers:
         - name: aquiladb
-          image: gcr.io/plexus-1d216/github.com/peterdeepsix/aquiladb@sha256:38e2804ec46237697a70bde5a193f61ec619655bfc358abe5b310b7893f4386d
+          image: ammaorg/aquiladb:latest
           ports:
             - containerPort: 50051
               name: aquiladb
           volumeMounts:
-            - name: aquiladb-data
+            - name: aquiladb-vol
               mountPath: /data
   volumeClaimTemplates:
     - metadata:
-        name: aquiladb-data
-        annotations:
-          volume.beta.kubernetes.io/storage-class: fast
+        name: aquiladb-vol
       spec:
         accessModes: ["ReadWriteOnce"]
+        storageClassName: standard
         resources:
           requests:
             storage: 10Gi
