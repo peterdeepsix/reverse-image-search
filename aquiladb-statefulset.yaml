@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: aquiladb
+  name: aquiladb-statefulset
   namespace: "default"
   labels:
-    app: "aquiladb"
+    app: "aquiladb-app"
 spec:
   selector:
     matchLabels:
-      app: aquiladb
-  serviceName: aquiladb
+      app: aquiladb-app
+  serviceName: aquiladb-service
   replicas: 3
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: aquiladb
+        app: aquiladb-app
     spec:
       containers:
-        - name: aquiladb
+        - name: aquiladb-container
           image: ammaorg/aquiladb:latest
           ports:
             - containerPort: 50051

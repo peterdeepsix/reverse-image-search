@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: aquiladb
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - aquiladb-gateway
+  http:
+  - route:
+    - destination:
+        host: aquiladb
+        port:
+          number: 50051
