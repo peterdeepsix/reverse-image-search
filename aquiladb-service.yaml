@@ -6,8 +6,8 @@ metadata:
     app: aquiladb
 spec:
   ports:
-    - name: aquiladb
-      port: 50051
-      targetPort: 50051
+  - name: http
+    port: 50051
+    targetPort: 50051
   selector:
     app: aquiladb
